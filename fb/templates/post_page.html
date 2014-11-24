@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>My facebook app</title>
+  </head>
+  <body>
+    <p><a href="http://localhost:8000">go back</a></p>
+    <h1>Post page</h1>
+    <h3> post id: {{ post_id }}</h3>
+    <p> {{ post_content.text }} </p>
+    <p style="border-bottom: 1px solid #000;">
+      <span>by <b>{{ post_content.author }}</b> on <b>{{ post_content.date_added }}</b></span>
+    </p>
+
+    <h3> Comments </h3>
+    <form method="POST" >
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <input type="hidden" name="post_id" value="{{ post_id }}">
+        <input type="submit" value="Post" />
+    </form>
+
+    {% for comment in comments %}
+      <p> {{ comment.text }} </p>
+      <p style="border-bottom: 1px solid #000;">
+        <span>by <b>{{ comment.author }}</b> on <b>{{ comment.date_added }}</b></span>
+      </p>
+      <br />
+    {% endfor %}
+  </body>
+</html>

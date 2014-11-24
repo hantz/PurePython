@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>My facebook app</title>
+  </head>
+  <body>
+    <h1>News feed</h1>
+
+    <form method="POST" >
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Post" />
+    </form>
+    {% for post in posts %}
+      <p> {{ post.text }} </p>
+      <p style="border-bottom: 1px solid #000;">
+        <span><a href="{{ post.link }}">see more</a></span> <br />
+        <span>by <b>{{ post.author }}</b> on <b>{{ post.date_added }}</b></span>
+      </p>
+      <br />
+    {% endfor %}
+  </body>
+</html>
